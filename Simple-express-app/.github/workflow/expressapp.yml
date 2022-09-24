@@ -1,0 +1,25 @@
+ ---
+
+name: express_application
+on:
+ push:
+  branches:[master]
+    pull:
+      branches:[master]
+
+  jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+        - uses: actions/checkout@v1
+        - name: Build & Push Image
+
+        run:
+           echo "${{ secrets.EXPRESSPROJECTSECRET }}" | docker login -u "iwanttologintodocker" --password-stdin
+          docker image build -t iwanttologintodocker/expressapp:v1
+          docker push iwanttologintodocker/expressapp:v1
+
+
+
